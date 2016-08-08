@@ -49,7 +49,7 @@ send "CREATE USER '$db_user'@'$db_host' IDENTIFIED BY '$db_pass';\r"
 
 # Create new database
 expect ">"
-send "CREATE DATABASE '$db_name' CHARACTER SET utf8 COLLATE utf8_general_ci;\r"
+send "CREATE DATABASE $db_name DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;\r"
 
 # Grant privilleges
 expect ">"
