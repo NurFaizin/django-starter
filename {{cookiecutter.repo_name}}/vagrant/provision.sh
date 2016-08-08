@@ -28,6 +28,15 @@ software=(
     "postgresql-contrib"
     "libpq-dev"
 
+    {% elif cookiecutter.db_engine == "mysql" -%}
+
+    "expect"
+    "python-dev"
+    "python3-dev"
+    "mysql-server"
+    "mysql-client"
+    "libmysqlclient-dev"
+
     {% endif %} )
 log_color="\e[1;36m"
 
@@ -86,7 +95,7 @@ source /home/vagrant/.profile
 
 # setup database
 logit "setting up project database"
-expect ${repo_dir}/vagrant/expects/set_db.exp ${db_name} ${db_user} ${db_password} ${os_user}
+expect ${repo_dir}/vagrant/expects/set_db.exp ${db_host} ${db_name} ${db_user} ${db_password} ${os_user}
 
 {% endif %}
 #-------------------------------------------------------------

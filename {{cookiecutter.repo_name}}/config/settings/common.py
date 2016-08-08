@@ -87,6 +87,12 @@ DATABASES = {
     'default': env.db("DATABASE_URL", default="{{cookiecutter.db_engine}}://{{cookiecutter.db_user}}:{{cookiecutter.db_password}}@{{cookiecutter.db_host}}/{{cookiecutter.db_name}}")
 }
 
+{%- elif cookiecutter.db_engine == "mysql" -%}
+
+DATABASES = {
+    'default': env.db("DATABASE_URL", default="{{cookiecutter.db_engine}}://{{cookiecutter.db_user}}:{{cookiecutter.db_password}}@{{cookiecutter.db_host}}/{{cookiecutter.db_name}}")
+}
+
 {%- else -%}
 
 DATABASES = {
@@ -179,7 +185,8 @@ ROOT_URLCONF = 'config.urls'
 # ------------------------------------------------------------------------------
 
 ADMINS = (
-    ("""{{cookiecutter.author_name}}""", '{{cookiecutter.email}}'),
+    ("""{{cookiecutter.author_name}}""", 
+'{{cookiecutter.author_email}}'),
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#managers

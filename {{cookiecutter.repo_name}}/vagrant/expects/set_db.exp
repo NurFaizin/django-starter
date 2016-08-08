@@ -2,13 +2,16 @@
 
 set timeout 10
 
-set db_name [lindex $argv 0]
-set db_user [lindex $argv 1]
-set db_pass [lindex $argv 2]
-set os_user [lindex $argv 3]
+set db_host [lindex $argv 0]
+set db_name [lindex $argv 1]
+set db_user [lindex $argv 2]
+set db_pass [lindex $argv 3]
+set os_user [lindex $argv 4]
 
 # information
 puts "entering interactive terminal"
+
+{% if cookiecutter.db_engine == "postgres" -%}
 
 # change to postgres user
 spawn sudo -i -u postgres
@@ -34,6 +37,30 @@ send "\\q\r"
 # exit user postgres
 expect "postgres@"
 send "exit\r"
+
+{% elif cookiecutter.db_engine == "mysql" -%}
+
+# Go to mysql prompt
+send "mysql -u root\r"
+
+# Create new user
+expect ">"
+send "CREATE USER '$db_user'@'$db_host' IDENTIFIED BY '$db_pass';\r"
+
+# Create new database
+expect ">"
+send "CREATE DATABASE '$db_name' CHARACTER SET utf8 COLLATE utf8_general_ci;\r"
+
+# Grant privilleges
+expect ">"
+send "GRANT ALL PRIVILEGES ON $db_name.* TO '$db_user'@'$db_host';\r"
+
+# Exit
+expect ">"
+send "\\q\r"
+
+{% endif %}
+
 
 # give control back to user
 interact

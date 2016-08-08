@@ -43,7 +43,7 @@ virtualenv_dir_path:
     default: /home/vagrant/.virtualenvs
 
 db_engine:
-    Which database do you want your project to use?  Postgres and sqlite are the options you have.  The project will configure correctly with whichever you choose and you can easily reconfigure the project after it's initialized if you don't like your choice.
+    Which database do you want your project to use?  Postgres, mysql and sqlite are the options you have.  The project will configure correctly with whichever you choose and you can easily reconfigure the project after it's initialized if you don't like your choice.
 
     default: sqlite
 
